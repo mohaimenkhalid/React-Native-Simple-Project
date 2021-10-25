@@ -1,11 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
 import Card from './app/componets/Card';
+import Screen from './app/componets/Screen';
 import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
 import MessagesScreen from './app/screens/MessagesScreen';
 import ViewImageScreen from './app/screens/ViewImageScreen';
 
 import WelcomeScreen from './app/screens/WelcomeScreen';
+import Icon from './app/componets/Icon';
 
 const App = () => {
   return (
@@ -23,7 +25,16 @@ const App = () => {
 
     // <ListingDetailsScreen />
     //<ViewImageScreen />
-    <MessagesScreen />
+    //<MessagesScreen />
+
+    <Screen>
+      <Icon
+        name="email"
+        size={40}
+        backgroundColor="black"
+        iconColor="white"
+      />
+    </Screen>
   );
 };
 
