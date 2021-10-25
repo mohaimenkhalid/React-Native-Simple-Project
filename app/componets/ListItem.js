@@ -24,7 +24,8 @@ function ListItem({title, subTitle, image, ImageComponent, onPress, renderRightA
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        padding: 20
+        padding: 15,
+        backgroundColor: color.white
     },
     image: {
         width: 80,
@@ -36,7 +37,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     title: {
-        fontWeight: "700"
+        fontWeight: "700",
+        fontSize: 18
     }
 })
 

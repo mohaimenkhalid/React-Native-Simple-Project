@@ -7,8 +7,8 @@ import MessagesScreen from './app/screens/MessagesScreen';
 import ViewImageScreen from './app/screens/ViewImageScreen';
 
 import WelcomeScreen from './app/screens/WelcomeScreen';
-import Icon from './app/componets/Icon';
-import ListItem from './app/componets/ListItem';
+
+import AccountScreen from './app/screens/AccountScreen';
 
 const App = () => {
   return (
@@ -28,21 +28,7 @@ const App = () => {
     //<ViewImageScreen />
     //<MessagesScreen />
 
-    <Screen>
-      <ListItem
-        title="Mohaimen Khalid"
-        subTitle="mohaimen707@gmail.com"
-        ImageComponent={
-          <Icon
-            name="email"
-            size={60}
-            backgroundColor="black"
-            iconColor="white"
-          />
-        }
-      />
-      
-    </Screen>
+    <AccountScreen />
   );
 };
 
