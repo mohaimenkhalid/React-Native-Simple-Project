@@ -9,26 +9,28 @@ import ViewImageScreen from './app/screens/ViewImageScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 
 import AccountScreen from './app/screens/AccountScreen';
+import ListingScreen from './app/screens/ListingScreen';
+import AppTextInput from './app/componets/AppTextInput';
+import AppPicker from './app/componets/AppPicker';
 
 const App = () => {
   return (
     //<WelcomeScreen />
-    // <View style={{
-    //   backgroundColor: "#f8f4f4",
-    //   padding: 15,
-    // }}>
-    //   <Card
-    //     title="Apple watch series 6"
-    //     subTitle="$500"
-    //     image={require("./app/assets/apple-watch.jpg")}
-    //   />
-    // </View>
-
     // <ListingDetailsScreen />
     //<ViewImageScreen />
     //<MessagesScreen />
+    //<AccountScreen />
+    //<ListingScreen />
 
-    <AccountScreen />
+    // <View>
+    //   <AppTextInput icon="email" placeholder="Your Email" />
+    //   <AppTextInput icon="key" placeholder="Your password" />
+    // </View>
+    <Screen>
+      <AppPicker placeholder="Category" icon="apps" /> 
+      <AppTextInput icon="email" placeholder="Email" /> 
+    </Screen>
+
   );
 };
 

@@ -15,7 +15,6 @@ function ListingDetailsScreen(props) {
                     image={require("../../app/assets/apple-watch.jpg")}
                     title="mohaimen khalid"
                     subTitle="5 Listings"
-                    style={styles.listItem}
                 />
             </View>
         </View>

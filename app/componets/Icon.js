@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import IMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 function Icon({name, size = 40, backgroundColor = "#000", iconColor = "#fff"}) {
@@ -13,7 +13,7 @@ function Icon({name, size = 40, backgroundColor = "#000", iconColor = "#fff"}) {
             justifyContent: "center",
             alignItems: "center"
         }} >
-            <IMaterialCommunityIcons name={name} color={iconColor} size={size*0.5} />
+            <MaterialCommunityIcons name={name} color={iconColor} size={size*0.5} />
         </View>
     );
 }
