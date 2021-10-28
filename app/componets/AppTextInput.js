@@ -4,11 +4,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import color from '../config/color';
 import defaultStyles from '../config/styles';
 
-function AppTextInput({icon, placeholder}) {
+function AppTextInput({icon, placeholder, ...others}) {
     return (
         <View style={styles.container}>
             {icon && <MaterialCommunityIcons name={icon} color={color.medium} size={25} />}
-            <TextInput placeholder={placeholder} style={[defaultStyles.text, styles.text]} />
+            <TextInput placeholder={placeholder} {...others} style={[defaultStyles.text, styles.text]} />
         </View>
     );
 }

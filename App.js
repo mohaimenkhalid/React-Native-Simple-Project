@@ -12,6 +12,7 @@ import AccountScreen from './app/screens/AccountScreen';
 import ListingScreen from './app/screens/ListingScreen';
 import AppTextInput from './app/componets/AppTextInput';
 import AppPicker from './app/componets/AppPicker';
+import LoginScreen from './app/screens/LoginScreen';
 
 const categories = [
   {label: "Furniture", value: 1},
@@ -33,16 +34,17 @@ const App = () => {
     //   <AppTextInput icon="email" placeholder="Your Email" />
     //   <AppTextInput icon="key" placeholder="Your password" />
     // </View>
-    <Screen>
-      <AppPicker 
-      icon="apps"
-      items={categories}
-      selectedItem={selectedCategory}
-      onSelectedItem={(item) => setSelectedCategory(item)}
-      placeholder="Category"
-    /> 
-      <AppTextInput icon="email" placeholder="Email" /> 
-    </Screen>
+    // <Screen>
+    //   <AppPicker 
+    //   icon="apps"
+    //   items={categories}
+    //   selectedItem={selectedCategory}
+    //   onSelectedItem={(item) => setSelectedCategory(item)}
+    //   placeholder="Category"
+    // /> 
+    //   <AppTextInput icon="email" placeholder="Email" /> 
+    // </Screen>
+    <LoginScreen />
 
   );
 };
