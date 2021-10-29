@@ -15,12 +15,12 @@ import AppPicker from './app/componets/AppPicker';
 import LoginScreen from './app/screens/LoginScreen';
 import ListingEditScreen from './app/screens/ListingEditScreen';
 import * as ImagePicker from "react-native-image-picker"
+import {request, PERMISSIONS} from 'react-native-permissions';
 
 const App = () => {
   const [imageSource, setImageSource] = useState(null);
 
   function selectImage() {
-    console.log("asd")
     let options = {
       title: 'You can choose one image',
       maxWidth: 256,
@@ -30,21 +30,29 @@ const App = () => {
       }
     };
 
-    ImagePicker.launchImageLibrary(options, response => {
-      console.log({ response });
+    //ImagePicker.launchCamera(options, res => console.log("done"))
 
-      if (response.didCancel) {
-        console.log('User cancelled photo picker');
-        Alert.alert('You did not select any image');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        let source = { uri: response.uri };
-        console.log({ source });
+    request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE).then(response => {
+        console.log(response)
+        ImagePicker.launchImageLibrary(options, response => {
+          console.log({ response });
+    
+          if (response.didCancel) {
+            console.log('User cancelled photo picker');
+            Alert.alert('You did not select any image');
+          } else if (response.error) {
+            console.log('ImagePicker Error: ', response.error);
+          } else if (response.customButton) {
+            console.log('User tapped custom button: ', response.customButton);
+          } else {
+            let source = { uri: response.uri };
+            console.log({ source });
+          }
+        });
       }
-    });
+      )
+
+    
   }
   return (
     <TouchableOpacity
