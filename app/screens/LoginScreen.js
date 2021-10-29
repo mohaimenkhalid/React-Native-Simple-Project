@@ -7,7 +7,7 @@ import { AppForm, AppFormField, FormSubmitButton } from '../componets/forms'
 let validationSchema = Yap.object().shape({
     email: Yap.string().required().email().label("Email"),
     password: Yap.string().required().min(4).label("Password")
-  });
+});
 
 function LoginScreen(props) {
     return (

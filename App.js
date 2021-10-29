@@ -13,6 +13,7 @@ import ListingScreen from './app/screens/ListingScreen';
 import AppTextInput from './app/componets/AppTextInput';
 import AppPicker from './app/componets/AppPicker';
 import LoginScreen from './app/screens/LoginScreen';
+import ListingEditScreen from './app/screens/ListingEditScreen';
 
 const categories = [
   {label: "Furniture", value: 1},
@@ -44,7 +45,8 @@ const App = () => {
     // /> 
     //   <AppTextInput icon="email" placeholder="Email" /> 
     // </Screen>
-    <LoginScreen />
+    //<LoginScreen />
+    <ListingEditScreen />
 
   );
 };
