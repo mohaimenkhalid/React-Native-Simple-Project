@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Image, StyleSheet} from "react-native"
-import AppText from '../componets/AppText';
-import AppTextInput from '../componets/AppTextInput';
-import AppButton from '../componets/Button';
 import Screen from '../componets/Screen';
 import { Formik } from 'formik'
 import * as Yap from 'yup';
-import ErrorMessage from '../componets/ErrorMessage';
 import AppFormField from '../componets/AppFormField';
+import FormSubmitButton from '../componets/FormSubmitButton';
 
 
 
@@ -31,7 +28,7 @@ function LoginScreen(props) {
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}
             >
-                { ({ handleSubmit }) => (
+                { () => (
                     <>
                         <AppFormField 
                             name='email'
@@ -54,9 +51,7 @@ function LoginScreen(props) {
                             secureTextEntry
                         />
 
-                        <AppButton title="Login" 
-                            onPress={handleSubmit} 
-                        />
+                        <FormSubmitButton title="Login" />
                     </>
                 )}
             </Formik>
