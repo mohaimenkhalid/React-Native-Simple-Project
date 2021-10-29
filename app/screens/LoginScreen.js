@@ -6,6 +6,7 @@ import AppButton from '../componets/Button';
 import Screen from '../componets/Screen';
 import { Formik } from 'formik'
 import * as Yap from 'yup';
+import ErrorMessage from '../componets/ErrorMessage';
 
 
 
@@ -29,7 +30,7 @@ function LoginScreen(props) {
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}
             >
-                { ({ handleChange, handleSubmit, errors }) => (
+                { ({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
                     <>
                         <AppTextInput 
                             icon='email'
@@ -39,8 +40,10 @@ function LoginScreen(props) {
                             keyboardType="email-address"
                             textContentType="emailAddress"
                             onChangeText={handleChange("email")}
+                            onBlur={() => setFieldTouched("email")}
                         />
-                        <AppText style={{color: 'red'}}>{errors.email}</AppText>
+
+                        <ErrorMessage error={errors.email} visible={touched.email} />
 
                         <AppTextInput 
                             icon='lock'
@@ -51,8 +54,9 @@ function LoginScreen(props) {
                             textContentType="password"
                             secureTextEntry
                             onChangeText={handleChange("password")}
+                            onBlur={() => setFieldTouched("password")}
                         />
-                        <AppText style={{color: 'red'}}>{errors.password}</AppText>
+                        <ErrorMessage error={errors.password} visible={touched.password} />
 
                         <AppButton title="Login" 
                             onPress={handleSubmit} 
