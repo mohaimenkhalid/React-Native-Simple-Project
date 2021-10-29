@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import Card from './app/componets/Card';
 import Screen from './app/componets/Screen';
 import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
@@ -14,16 +14,44 @@ import AppTextInput from './app/componets/AppTextInput';
 import AppPicker from './app/componets/AppPicker';
 import LoginScreen from './app/screens/LoginScreen';
 import ListingEditScreen from './app/screens/ListingEditScreen';
-
-const categories = [
-  {label: "Furniture", value: 1},
-  {label: "Book", value: 2},
-  {label: "Camera", value: 3},
-]
+import * as ImagePicker from "react-native-image-picker"
 
 const App = () => {
-  const [selectedCategory, setSelectedCategory] = useState('')
+  const [imageSource, setImageSource] = useState(null);
+
+  function selectImage() {
+    console.log("asd")
+    let options = {
+      title: 'You can choose one image',
+      maxWidth: 256,
+      maxHeight: 256,
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+
+    ImagePicker.launchImageLibrary(options, response => {
+      console.log({ response });
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+        Alert.alert('You did not select any image');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        let source = { uri: response.uri };
+        console.log({ source });
+      }
+    });
+  }
   return (
+    <TouchableOpacity
+        onPress={selectImage}
+      >
+        <Text >Pick an image</Text>
+    </TouchableOpacity>
     //<WelcomeScreen />
     // <ListingDetailsScreen />
     //<ViewImageScreen />
@@ -46,7 +74,7 @@ const App = () => {
     //   <AppTextInput icon="email" placeholder="Email" /> 
     // </Screen>
     //<LoginScreen />
-    <ListingEditScreen />
+    //<ListingEditScreen />
 
   );
 };
