@@ -5,6 +5,16 @@ import AppTextInput from '../componets/AppTextInput';
 import AppButton from '../componets/Button';
 import Screen from '../componets/Screen';
 import { Formik } from 'formik'
+import * as Yap from 'yup';
+
+
+
+let validationSchema = Yap.object().shape({
+    email: Yap.string().required().email().label("Email"),
+    password: Yap.string().required().min(4).label("Password")
+  });
+
+
 
 function LoginScreen(props) {
     return (
@@ -17,8 +27,9 @@ function LoginScreen(props) {
             <Formik 
                 initialValues={{email: '', password: ''}}
                 onSubmit={values => console.log(values)}
+                validationSchema={validationSchema}
             >
-                { ({ handleChange, handleSubmit }) => (
+                { ({ handleChange, handleSubmit, errors }) => (
                     <>
                         <AppTextInput 
                             icon='email'
@@ -29,6 +40,7 @@ function LoginScreen(props) {
                             textContentType="emailAddress"
                             onChangeText={handleChange("email")}
                         />
+                        <AppText style={{color: 'red'}}>{errors.email}</AppText>
 
                         <AppTextInput 
                             icon='lock'
@@ -40,6 +52,7 @@ function LoginScreen(props) {
                             secureTextEntry
                             onChangeText={handleChange("password")}
                         />
+                        <AppText style={{color: 'red'}}>{errors.password}</AppText>
 
                         <AppButton title="Login" 
                             onPress={handleSubmit} 
