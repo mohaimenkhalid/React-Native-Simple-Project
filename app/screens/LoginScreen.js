@@ -7,6 +7,7 @@ import Screen from '../componets/Screen';
 import { Formik } from 'formik'
 import * as Yap from 'yup';
 import ErrorMessage from '../componets/ErrorMessage';
+import AppFormField from '../componets/AppFormField';
 
 
 
@@ -30,22 +31,20 @@ function LoginScreen(props) {
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}
             >
-                { ({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
+                { ({ handleSubmit }) => (
                     <>
-                        <AppTextInput 
+                        <AppFormField 
+                            name='email'
                             icon='email'
                             placeholder="Email"
                             autoCapitalize="none"
                             autoCorrection={false}
                             keyboardType="email-address"
                             textContentType="emailAddress"
-                            onChangeText={handleChange("email")}
-                            onBlur={() => setFieldTouched("email")}
                         />
 
-                        <ErrorMessage error={errors.email} visible={touched.email} />
-
-                        <AppTextInput 
+                        <AppFormField 
+                            name='password'
                             icon='lock'
                             placeholder="Password"
                             autoCapitalize="none"
@@ -53,10 +52,7 @@ function LoginScreen(props) {
                             keyboardType="email-address"
                             textContentType="password"
                             secureTextEntry
-                            onChangeText={handleChange("password")}
-                            onBlur={() => setFieldTouched("password")}
                         />
-                        <ErrorMessage error={errors.password} visible={touched.password} />
 
                         <AppButton title="Login" 
                             onPress={handleSubmit} 
