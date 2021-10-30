@@ -18,6 +18,7 @@ import * as ImagePicker from "react-native-image-picker"
 import {request, PERMISSIONS} from 'react-native-permissions';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 const Link = () => {
@@ -28,27 +29,40 @@ const Link = () => {
 }
 
 
+const Tab = createBottomTabNavigator();
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home1" component={StackNavigator}
+        options={{
+          headerShown: false
+         }}
+      />
+      <Tab.Screen name="Settings"
+       component={MessageScreen}
+       />
+    </Tab.Navigator>
+  );
+}
+
+
 function HomeScreen({ navigation  }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <Button 
         title="Message Page"
-        onPress={() => navigation.navigate('MessageScreen', {id: "1"})}
+        onPress={() => navigation.navigate('MessageScreen')}
        />
        <Link />
     </View>
   );
 }
 
-function MessageScreen({route, navigation}) {
-  console.log(route.params.id)
-  navigation.setOptions({
-    title: `${route.params.id}`
-  });
+function MessageScreen({route}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Message Screen - {route.params.id}</Text>
+      <Text>Message Screen </Text>
     </View>
   );
 }
@@ -57,7 +71,7 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen}/>
       <Stack.Screen
        name="MessageScreen" 
        component={MessageScreen}
@@ -72,7 +86,8 @@ const StackNavigator = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <StackNavigator />
+      {/* <StackNavigator /> */}
+      <MyTabs />
     </NavigationContainer>
     //<WelcomeScreen />
     // <ListingDetailsScreen />
