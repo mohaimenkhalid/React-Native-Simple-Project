@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, TouchableOpacity, Text, Alert, Button } from 'react-native';
 import Card from './app/componets/Card';
 import Screen from './app/componets/Screen';
 import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
@@ -16,50 +16,64 @@ import LoginScreen from './app/screens/LoginScreen';
 import ListingEditScreen from './app/screens/ListingEditScreen';
 import * as ImagePicker from "react-native-image-picker"
 import {request, PERMISSIONS} from 'react-native-permissions';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
+const Link = () => {
+  const navigation = useNavigation();
+  return (
+    <Button title="Click"  onPress={() => navigation.navigate('MessageScreen', {id: 2})} />
+  );
+}
+
+
+function HomeScreen({ navigation  }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button 
+        title="Message Page"
+        onPress={() => navigation.navigate('MessageScreen', {id: "1"})}
+       />
+       <Link />
+    </View>
+  );
+}
+
+function MessageScreen({route, navigation}) {
+  console.log(route.params.id)
+  navigation.setOptions({
+    title: `${route.params.id}`
+  });
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Message Screen - {route.params.id}</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+const StackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+       name="MessageScreen" 
+       component={MessageScreen}
+       
+      />
+    </Stack.Navigator>
+  );
+  
+}
+
 
 const App = () => {
-  const [imageSource, setImageSource] = useState(null);
-
-  function selectImage() {
-    let options = {
-      title: 'You can choose one image',
-      maxWidth: 256,
-      maxHeight: 256,
-      storageOptions: {
-        skipBackup: true
-      }
-    };
-
-    //ImagePicker.launchCamera(options, res => console.log("done"))
-
-    request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE).then(response => {
-        console.log(response)
-        ImagePicker.launchImageLibrary(options, response => {
-          console.log({ response });
-    
-          if (response.didCancel) {
-            console.log('User cancelled photo picker');
-            Alert.alert('You did not select any image');
-          } else if (response.error) {
-            console.log('ImagePicker Error: ', response.error);
-          } else if (response.customButton) {
-            console.log('User tapped custom button: ', response.customButton);
-          } else {
-            let source = { uri: response.uri };
-            console.log({ source });
-          }
-        });
-      }
-      )
-
-    
-  }
   return (
-    <TouchableOpacity
-        onPress={selectImage}
-      >
-        <Text >Pick an image</Text>
-    </TouchableOpacity>
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
     //<WelcomeScreen />
     // <ListingDetailsScreen />
     //<ViewImageScreen />
