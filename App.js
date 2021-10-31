@@ -17,123 +17,16 @@ import ListingEditScreen from './app/screens/ListingEditScreen';
 import * as ImagePicker from "react-native-image-picker"
 import {request, PERMISSIONS} from 'react-native-permissions';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-
-
-const Link = () => {
-  const navigation = useNavigation();
-  return (
-    <Button title="Click"  onPress={() => navigation.navigate('MessageScreen', {id: 2})} />
-  );
-}
-
-
-const Tab = createBottomTabNavigator();
-function MyTabs() {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
-      }}
-    >
-      <Tab.Screen 
-      name="Home1" 
-      component={StackNavigator}
-      options={{
-        headerShown: false,
-        tabBarIcon: ({size, color}) => <MaterialCommunityIcons name="home" color={color} size={size} />
-        }}
-      />
-      <Tab.Screen name="Settings"
-       component={MessageScreen}
-       options={{
-      
-        tabBarIcon: ({size, color}) => <MaterialCommunityIcons name="email" color={color} size={size} />
-        }}
-       />
-       <Tab.Screen name="Message"
-       component={MessageScreen}
-       options={{
-      
-        tabBarIcon: ({size, color}) => <MaterialCommunityIcons name="email" color={color} size={size} />
-        }}
-       />
-    </Tab.Navigator>
-  );
-}
-
-
-function HomeScreen({ navigation  }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button 
-        title="Message Page"
-        onPress={() => navigation.navigate('MessageScreen')}
-       />
-       <Link />
-    </View>
-  );
-}
-
-function MessageScreen({route}) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Message Screen </Text>
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-const StackNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen}/>
-      <Stack.Screen
-       name="MessageScreen" 
-       component={MessageScreen}
-       
-      />
-    </Stack.Navigator>
-  );
-  
-}
-
+import AuthNavigator from './app/navigation/AuthNavigator';
+import navigationTheme from './app/navigation/navigationTheme';
+import AppNavigator from './app/navigation/AppNavigator';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      {/* <StackNavigator /> */}
-      <MyTabs />
+    <NavigationContainer theme={navigationTheme}>
+        <AppNavigator />
     </NavigationContainer>
-    //<WelcomeScreen />
-    // <ListingDetailsScreen />
-    //<ViewImageScreen />
-    //<MessagesScreen />
-    //<AccountScreen />
-    //<ListingScreen />
-
-    // <View>
-    //   <AppTextInput icon="email" placeholder="Your Email" />
-    //   <AppTextInput icon="key" placeholder="Your password" />
-    // </View>
-    // <Screen>
-    //   <AppPicker 
-    //   icon="apps"
-    //   items={categories}
-    //   selectedItem={selectedCategory}
-    //   onSelectedItem={(item) => setSelectedCategory(item)}
-    //   placeholder="Category"
-    // /> 
-    //   <AppTextInput icon="email" placeholder="Email" /> 
-    // </Screen>
-    //<LoginScreen />
-    //<ListingEditScreen />
-
   );
 };
 
