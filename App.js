@@ -21,8 +21,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import AuthNavigator from './app/navigation/AuthNavigator';
 import navigationTheme from './app/navigation/navigationTheme';
 import AppNavigator from './app/navigation/AppNavigator';
+import NetInfo, {useNetInfo} from '@react-native-community/netinfo';
 
 const App = () => {
+
+  //NetInfo.fetch().then(netInfo => console.log(netInfo.isInternetReachable) )
+  //const unsubscribe = NetInfo.addEventListener(netInfo => console.log(netInfo))
+
   return (
     <NavigationContainer theme={navigationTheme}>
         <AppNavigator />

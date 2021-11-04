@@ -1,5 +1,6 @@
-import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, StyleSheet, ActivityIndicator} from 'react-native';
+import listingApi from '../api/listing';
 import Card from '../componets/Card';
 
 import Screen from '../componets/Screen'
@@ -27,8 +28,22 @@ const listings = [
 ];
 
 function ListingScreen({ navigation }) {
+    const [data, setData] = useState('')
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        loadListings();
+    }, [])
+
+    const loadListings = () => {
+        const resp = listingApi.getListings();
+        console.log(resp)
+        setLoading(false)
+    }
+
     return (
         <Screen style={styles.screen}>
+            <ActivityIndicator size="large" color="tomato" animating={loading} />
             <FlatList 
                 data={listings}
                 keyExtractor={listing => listing.id.toString()}
